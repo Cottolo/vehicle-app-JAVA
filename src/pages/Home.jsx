@@ -21,6 +21,9 @@ function Home() {
             console.log(err);
         }
     }
+    function handleDetail(id) {
+        navigate("/detail-vehicle/" + id);
+    };
 
     function handleUpdate(id) {
         navigate("/edite-vehicle/" + id);
@@ -31,7 +34,7 @@ function Home() {
         searchByName : "",
         searchByNoRegistrasi : ""
     })
-    const [data,setData] = React.useState({})
+    const [data,setData] = React.useState()
 
     const handleChange = (e) => {
         setForm({
@@ -70,32 +73,38 @@ function Home() {
 
 
     //DELETE
-    const [confirmDelete, setConfirmDelete] = React.useState(null);
+    const [confirmDelete, setConfirmDelete] = React.useState(false);
     const [show, setShow] = React.useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () =>{
+        setShow(false);
+        setConfirmDelete(false)
+    } 
+        
     const handleShow = () => setShow(true);
 
     const deleteById = async (id) => {
         try {
             await API.delete(`/vehicle/${id}`);
-
+            getVehicles()
         } catch (error) {
             console.log(error);
         }
     };
 
+    const [deleteId,setDeleteId]=React.useState(null)
     const handleDelete = (id) => {
-        deleteById(id);
-        getVehicles()
         handleShow();
+        setDeleteId(id);
     };
 
     React.useEffect(()=>{
         getVehicles()
-        handleClose()
-        setConfirmDelete(null)
+        if (confirmDelete) {
+            handleClose()
+            deleteById(deleteId)
+            setConfirmDelete(false)
+        }
     },[confirmDelete])
-
     return (
         <div>
             <div>
@@ -178,21 +187,21 @@ function Home() {
                                     <td>{item.bahan_bakar}</td>
                                     <td>
                                         <button
-                                            onClick={() => handleUpdate(item.id)}
+                                            onClick={() => handleDetail(item.id)}
                                             className='text-warning border-0 fw-bold'>Detail</button>
                                         <button
                                             onClick={() => handleUpdate(item.id)}
                                             className='text-primary border-0 fw-bold'>Edite</button>
                                         <button
-                                            onClick={() => handleDelete(item.id)}
+                                            onClick={(e) => handleDelete(item.id)}
                                             className='text-danger border-0 fw-bold'>Delete</button>
 
                                     </td>
                                 </tr>
                             ))
                         ):(
-                                   data?.map((item, index) => (
-                                <tr >
+                                data?.map((item, index) => (
+                                <tr key={index}>
                                     <td>{index + 1} </td>
                                     <td>{item.no_registrasi}</td>
                                     <td>{item.nama_pemilik}</td>
@@ -203,7 +212,7 @@ function Home() {
                                     <td>{item.bahan_bakar}</td>
                                     <td>
                                         <button
-                                            onClick={() => handleUpdate(item.id)}
+                                            onClick={() => handleDetail(item.id)}
                                             className='text-warning border-0 fw-bold'>Detail</button>
                                         <button
                                             onClick={() => handleUpdate(item.id)}

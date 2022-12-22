@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { API } from '../config/API';
 import folder from '../pics/folder.png'
 
-function EditeVehicle() {
+function DetailVehicle() {
     const navigate = useNavigate()
     const {id} = useParams()
 
@@ -16,32 +16,6 @@ function EditeVehicle() {
             setFormData(response.data)
         }catch(err){
             console.log(err);
-        }
-    }
-
-    //EDITE VEHICLE
-
-    function handleOnchange(e){
-        setFormData({
-            ...formData,
-            // [e.target.id] : e.target.value,
-            [e.target.id] :
-            e.target.id === "tahun_pembuatan"? e.target.value= Math.max(1, Math.min(2022, Number(e.target.value))): e.target.value
-
-        });
-    };
-
-    const handleOnedite = async(e)=>{
-        e.preventDefault();
-        try{
-            e.preventDefault();
-            const response = await API.patch("/vehicle",formData);
-            navigate("/")
-
-        }
-        catch(error){
-            console.log(error);
-
         }
     }
 
@@ -70,7 +44,6 @@ function EditeVehicle() {
                 </div>
             </nav>
             <form className='mx-5 mt-3'
-            onSubmit={handleOnedite}
             >
                 <h2 className='text-start'>Tambah Data kendaraan</h2>
                 <div className='d-flex gap-5'>
@@ -78,30 +51,29 @@ function EditeVehicle() {
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="no_registrasi" className="form-label">No Registrasi</label>
                             <input type="text" className="form-control border-dark" id="no_registrasi" 
-                            onChange={handleOnchange}
-                            placeholder={formData.no_registrasi}
-                            // placeholder={formData.no_registrasi}
+                            defaultValue={formData.no_registrasi}
+                            readOnly
                             />
                         </div>
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="nama_pemilik" className="form-label">Nama Pemilik</label>
                             <input type="text" className="form-control border-dark" id="nama_pemilik"
-                            onChange={handleOnchange}
-                            placeholder={formData.nama_pemilik}
+                            readOnly
+                            defaultValue={formData.nama_pemilik}
                             />
                         </div>
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="merk_kendaraan" className="form-label">Merk Kendaraan</label>
                             <input type="text" className="form-control border-dark" id="merk_kendaraan"
-                            onChange={handleOnchange}
-                            placeholder={formData.merk_kendaraan}
+                            defaultValue={formData.merk_kendaraan}
+                            readOnly
                             />
                         </div>
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="alamat" className="form-label">Alamat Pemilik Kendaraan</label>
                             <textarea maxLength={500} rows="4" type="text-area" className="form-control border-dark" id="alamat" 
-                            onChange={handleOnchange}
-                            placeholder={formData.alamat}
+                            readOnly
+                            defaultValue={formData.alamat}
                             />
                         </div>
                     </div>
@@ -110,22 +82,30 @@ function EditeVehicle() {
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="tahun_pembuatn" className="form-label">Tahun Pembuatan</label>
                             <input type="number" maxLength={4} className="form-control border-dark" id="tahun_pembuatan"
-                                onChange={handleOnchange}
-                                placeholder={formData.tahun_pembuatan}
+                                defaultValue={formData.tahun_pembuatan}
+                                readOnly
+                                value={formData.tahun_pembuatan}
                             />
                         </div>
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="kapasitas_silinder" className="form-label">Kapasitas Silinder</label>
                             <input type="text" className="form-control border-dark" id="kapasitas_silinder" 
-                            onChange={handleOnchange}
-                            placeholder={formData.kapasitas_silinder}
+                            defaultValue={formData.kapasitas_silinder}
+                            readOnly
                             />
                         </div>
                         <div className="mb-3 text-start mt-1">
+                            <label htmlFor="kapasitas_silinder" className="form-label">Warna Kendaraan</label>
+                            <input type="text" className="form-control border-dark"
+                            defaultValue={formData.warna_kendaraan}
+                            readOnly
+                            />
+                        </div>
+                        {/* <div className="mb-3 text-start mt-1">
                             <label htmlFor="nama_kendaraan" className="form-label">Warna Kendaraan</label>
                             <select className="form-select form-select-md mb-3 border-dark" aria-label=".form-select-lg example"
                             id="warna_kendaraan"
-                            onChange={handleOnchange}
+                            readOnly
                             value={formData.warna_kendaraan}
                             >
                                 <option value="Merah">Merah</option>
@@ -133,18 +113,18 @@ function EditeVehicle() {
                                 <option value="Biru">Biru</option>
                                 <option value="Abu-Abu">Abu-Abu</option>
                             </select>
-                        </div>
+                        </div> */}
                         <div className="mb-3 text-start mt-1">
                             <label htmlFor="bahan_bakar" className="form-label">Bahan Bakar</label>
                             <input className="form-control border-dark" id="bahan_bakar" 
-                            onChange={handleOnchange}
-                            placeholder={formData.bahan_bakar}
+                            readOnly
+                            defaultValue={formData.bahan_bakar}
                             />
                         </div>
                     </div>
                 </div>
                 <div className='d-flex justify-content-start gap-3 mb-3 '>
-                    <button className='btn bg-primary fw-bold' type='submit'>Simpan</button>
+                    {/* <button className='btn bg-primary fw-bold' type='submit'>Simpan</button> */}
                     <button className='btn bg-danger fw-bold'
                     onClick={()=>navigate("/")}
                     >Kembali</button>
@@ -157,4 +137,4 @@ function EditeVehicle() {
     )
 }
 
-export default EditeVehicle
+export default DetailVehicle ;
