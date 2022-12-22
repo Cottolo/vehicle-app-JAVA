@@ -1,6 +1,38 @@
 package com.domain.dto;
 
-public class searchData {
+public class SearchData {
+
+    // private String noReg;
+    
+    // public SearcData(){
+
+    // }
+
+    // public SearcData(String noReg, String nameS){
+    //     this.noReg = noReg;
+    //     this.nameS = nameS;
+    // }
+
+    // public String getNoReg(){
+    //     return noReg;
+    // }
+    
+    // public void setNoReg(String noReg){
+    //     this.noReg = noReg;
+    // }
+    
+    
+    // private String nameS;
+    
+    // public String getName(){
+    //     return nameS;
+    // }
+
+    // public void setName(String nameS){
+    //     this.nameS = nameS;
+    // }
+
+
     private String searchByName;
 
     public String getSearchByName() {
@@ -20,4 +52,8 @@ public class searchData {
     public void setSearchByNoRegistrasi(String searchByNoRegistrasi) {
         this.searchByNoRegistrasi = searchByNoRegistrasi;
     }
+
+
+
+
 }

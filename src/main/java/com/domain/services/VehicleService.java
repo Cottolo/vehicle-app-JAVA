@@ -45,20 +45,20 @@ public class VehicleService {
     // public List<Vehicle> findByName(String no_register){
     //     return vehicleRepo.findByNo_RegisterContains(no_register);
     // }
-     public List<Vehicle> findByNamaPemilik(String string) {
-        return vehicleRepo.findByNamaPemilik(string);
-    }
+    //  public List<Vehicle> findByNamaPemilik(String string) {
+    //     return vehicleRepo.findByNamaPemilik(string);
+    // }
 
     public List<Vehicle> findByNamaPemilikLike(String string) {
-        return vehicleRepo.findByNamaPemilikLike("%" + string + "%");
+        return vehicleRepo.findByNamaPemilikLike( string );
     }
 
-    public List<Vehicle> findByNomorRegistrasi(String no_registrasi) {
-        return vehicleRepo.findByNomorRegistrasi(no_registrasi);
-    }
+    // public List<Vehicle> findByNomorRegistrasi(String no_registrasi) {
+    //     return vehicleRepo.findByNomorRegistrasi(no_registrasi);
+    // }
 
     public List<Vehicle> findByNomorRegistrasiLike(String nama_pemilik) {
-        return vehicleRepo.findByNomorRegistrasiLike("%" + nama_pemilik + "%");
+        return vehicleRepo.findByNomorRegistrasiLike(nama_pemilik );
     }
 
     public List<Vehicle> searchVehicles(String nama_pemilik, String no_registrasi) {
@@ -67,7 +67,7 @@ public class VehicleService {
         if (no_registrasi.equals("") && StringUtils.hasText(nama_pemilik)) {
             vehiclesList = vehicleRepo.findByNamaPemilikLike(nama_pemilik);
         } else if (StringUtils.hasText(no_registrasi) && nama_pemilik.equals("")) {
-            vehiclesList = vehicleRepo.findByNomorRegistrasi(no_registrasi);
+            vehiclesList = vehicleRepo.findByNomorRegistrasiLike(no_registrasi);
         } else {
             vehiclesList = vehicleRepo.searchByNamaPemilikAndNomorRegistrasi(nama_pemilik,
                     no_registrasi);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.domain.dto.searchData;
+import com.domain.dto.SearchData;
 import com.domain.models.entities.Vehicle;
 import com.domain.services.VehicleService;
 
@@ -51,23 +51,23 @@ public class VehicleController {
         vehicleService.removeOne(id);
     }
 
-    @PostMapping("/search/namapemilik")
-    public List<Vehicle> getVehicleByNamaPemilik(@RequestBody searchData searchData) {
-        return vehicleService.findByNamaPemilik(searchData.getSearchByName());
-    }
+    // @PostMapping("/search/namapemilik")
+    // public List<Vehicle> getVehicleByNamaPemilik(@RequestBody SearchData searchData) {
+    //     return vehicleService.findByNamaPemilik(searchData.getSearchByName());
+    // }
 
-    @PostMapping("/search/nomorregkendaraan")
-    public List<Vehicle> getByNomorRegistrasi(@RequestBody searchData searchData) {
-        return vehicleService.findByNomorRegistrasi(searchData.getSearchByNoRegistrasi());
-    }
+    // @PostMapping("/search/nomorregkendaraan")
+    // public List<Vehicle> getByNomorRegistrasi(@RequestBody SearchData searchData) {
+    //     return vehicleService.findByNomorRegistrasi(searchData.getSearchByNoRegistrasi());
+    // }
 
-    @PostMapping("/search/namapemiliklike")
-    public List<Vehicle> getByNamaPemilikLike(@RequestBody searchData searchData) {
-        return vehicleService.findByNamaPemilikLike(searchData.getSearchByName());
-    }
+    // @PostMapping("/search/namapemiliklike")
+    // public List<Vehicle> getByNamaPemilikLike(@RequestBody SearchData searchData) {
+    //     return vehicleService.findByNamaPemilikLike(searchData.getSearchByName());
+    // }
 
     @PostMapping("/search")
-    List<Vehicle> search(@RequestBody searchData searchData) {
+    List<Vehicle> search(@RequestBody SearchData searchData) {
         return vehicleService.searchVehicles(searchData.getSearchByName(),
                 searchData.getSearchByNoRegistrasi());
     }
